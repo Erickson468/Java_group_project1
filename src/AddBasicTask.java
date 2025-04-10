@@ -133,8 +133,8 @@ public class AddBasicTask {
                 task.put("description", scanner.nextLine());
 
                 // განახლებები task_type-ის მიხედვით
-                if (task.has("task_type")) {
-                    String type = task.getString("task_type");
+                if (task.has("type")) {
+                    String type = task.getString("type");
 
                     if (type.equalsIgnoreCase("repeatable")) {
                         System.out.print("Enter new repeat count: ");
