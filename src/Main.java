@@ -24,25 +24,59 @@ public static void main(String[] args) throws IOException {
                 System.out.print("Enter your username: ");
                 String username = scanner.nextLine();
 
-                AddBasicTask.addTask(username);
+                System.out.println("Select task type:");
+                System.out.println("1. Add Basic Task");
+                System.out.println("2. Add Limited Task");
+                System.out.println("3. Add Repeatable Task");
+
+                String taskType = scanner.nextLine();
+
+                switch (taskType) {
+                    case "1":
+                        AddBasicTask.addTask(username, "basic");
+                        break;
+                    case "2":
+                        AddBasicTask.addTask(username, "limited");
+                        break;
+                    case "3":
+                        AddBasicTask.addTask(username, "repeatable");
+                        break;
+                    default:
+                        System.out.println("Invalid task type selection.");
+                }
                 break;
             case "2":
                 AddBasicTask.getAllTasks();
                 break;
             case "3":
                 System.out.print("Enter task ID to view: ");
-                int taskId = Integer.parseInt(scanner.nextLine());
-                AddBasicTask.getTaskById(taskId);
+                String viewIdStr = scanner.nextLine();
+                if (isNumeric(viewIdStr)) {
+                    int viewId = Integer.parseInt(viewIdStr);
+                    AddBasicTask.getTaskById(viewId);
+                } else {
+                    System.out.println("Invalid ID.");
+                }
                 break;
             case "4":
                 System.out.print("Enter task ID to update: ");
-                int updateId = Integer.parseInt(scanner.nextLine());
-                AddBasicTask.updateTask(updateId);
+                String updateIdStr = scanner.nextLine();
+                if (isNumeric(updateIdStr)) {
+                    int updateId = Integer.parseInt(updateIdStr);
+                    AddBasicTask.updateTask(updateId);
+                } else {
+                    System.out.println("Invalid ID.");
+                }
                 break;
             case "5":
                 System.out.print("Enter task ID to delete: ");
-                int deleteId = Integer.parseInt(scanner.nextLine());
-                AddBasicTask.deleteTask(deleteId);
+                String deleteIdStr = scanner.nextLine();
+                if (isNumeric(deleteIdStr)) {
+                    int deleteId = Integer.parseInt(deleteIdStr);
+                    AddBasicTask.deleteTask(deleteId);
+                } else {
+                    System.out.println("Invalid ID.");
+                }
                 break;
             case "6":
                 running = false;
@@ -52,5 +86,9 @@ public static void main(String[] args) throws IOException {
         }
     }
 }
+
+    private static boolean isNumeric(String str) {
+        return str.matches("\\d+"); // \\d+ არის ნებისმიერი ციფრი 0-დან 9-მდე
+    }
 }
 
